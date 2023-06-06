@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro
+        http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+  <changeSet id="1" author="vernik03">
+    <createTable tableName="users">
+      <column name="id" type="bigserial" >
+        <constraints primaryKey="true"
+                     nullable="false"/>
+      </column>
+
+      <column name="name" type="varchar(255)">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="is_admin" type="bool">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="login" type="varchar(255)">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="password" type="varchar(255)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+    <createTable tableName="credit_cards">
+      <column name="id" type="bigserial">
+        <constraints primaryKey="true"
+                     nullable="false"/>
+      </column>
+
+      <column name="card_number" type="varchar(255)">
+        <constraints nullable="false"/>
+      </column>
+
+    </createTable>
+
+    <createTable tableName="bank_accounts">
+      <column name="fk_user_id" type="bigint">
+        <constraints foreignKeyName="fk_user_id"
+                     references="users(id)"
+                     nullable="false"/>
+      </column>
+
+      <column name="fk_credit_card_id" type="bigint">
+        <constraints foreignKeyName="fk_credit_card_id"
+                     references="credit_cards(id)"
+                     nullable="false"/>
+      </column>
+
+      <column name="balance" type="double">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="is_blocked" type="boolean">
+        <constraints nullable="false"/>
+      </column>
+
+    </createTable>
+  </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,355 @@
+{
+	"info": {
+		"_postman_id": "722035a2-ffb5-4576-9fdd-154cbbf59b88",
+		"name": "Airport management system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19089953"
+	},
+	"item": [
+		{
+			"name": "Crew members",
+			"item": [
+				{
+					"name": "Get all crew members",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/crew-members",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"crew-members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get crew member by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/crew-members/1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"crew-members",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new crew member",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Boba\",\r\n    \"surname\": \"Bobenko\",\r\n    \"position\": \"OPERATOR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/crew-members",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"crew-members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update crew member",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pedro\",\r\n    \"surname\": \"Pedrovich\",\r\n    \"position\": \"PILOT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/crew-members/3",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"crew-members",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete crew member by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/crew-members/5",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"crew-members",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Link up flight",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idToLink\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/crew-members/1/credit_cards",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"crew-members",
+								"1",
+								"credit_cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unlink up flight",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/crew-members/1/credit_cards/2",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"crew-members",
+								"1",
+								"credit_cards",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Flights",
+			"item": [
+				{
+					"name": "Get all credit_cards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/credit_cards",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"credit_cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get flight by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/credit_cards/1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"credit_cards",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new flight",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"departureFrom\": \"Boryspil\",\r\n    \"destination\": \"Lviv\",\r\n    \"departureTime\": \"2023-07-23T23:53:00\",\r\n    \"arrivalTime\": \"2023-07-24T11:32:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/credit_cards",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"credit_cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update flight",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"departureFrom\": \"Rivne\",\r\n    \"destination\": \"Lviv\",\r\n    \"departureTime\": \"2023-07-23T23:53:00\",\r\n    \"arrivalTime\": \"2023-07-24T11:32:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/credit_cards/10",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"credit_cards",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete flight by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/credit_cards/11",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"credit_cards",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Link up crew member",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idToLink\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/credit_cards/10/crew-members",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"credit_cards",
+								"10",
+								"crew-members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unlink up crew member",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/credit_cards/10/crew-members/1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"credit_cards",
+								"10",
+								"crew-members",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "localhost:8080",
+			"type": "string"
+		}
+	]
+}

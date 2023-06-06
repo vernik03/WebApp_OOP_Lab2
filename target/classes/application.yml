@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    username: postgres
+    password: admin
+    url: jdbc:postgresql://85.209.46.216:5432/PaymentDB_v2
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+  liquibase:
+    change-log: db/changelog-master.xml
+    enabled: false
+
+server:
+  port: 8087
+
+redis:
+  host: 127.0.0.1

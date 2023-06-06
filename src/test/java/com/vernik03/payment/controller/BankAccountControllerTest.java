@@ -42,7 +42,7 @@ class BankAccountControllerTest {
   private BankAccountService bankAccountService;
 
   @Autowired
-  private FlightController flightController;
+  private BankAccountController bankAccountController;
 
   @Autowired
   private TestRestTemplate restTemplate;
@@ -50,7 +50,7 @@ class BankAccountControllerTest {
   @Test
   void contextLoads() {
     assertNotNull(bankAccountService);
-    assertNotNull(flightController);
+    assertNotNull(bankAccountController);
     assertNotNull(restTemplate);
   }
 

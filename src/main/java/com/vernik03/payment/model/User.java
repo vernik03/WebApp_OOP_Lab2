@@ -49,7 +49,7 @@ public class User {
       joinColumns = @JoinColumn(name = "fk_user_id"),
       inverseJoinColumns = @JoinColumn(name = "fk_bank_account_id")
   )
-  private Set<BankAccount> bank_accounts = new HashSet<>();
+  private Set<BankAccount> bankAccounts = new HashSet<>();
 
   @Override
   public boolean equals(Object o) {

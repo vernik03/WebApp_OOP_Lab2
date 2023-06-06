@@ -70,7 +70,7 @@ class CreditCardServiceTest {
   @Test
   void unlinkUpCrewMemberAndFlightWhenProvidedNonExistentCrewMemberId() {
     Exception e = assertThrows(NotFoundException.class,
-        () -> linkService.unlinkUpUserAndCreditCard(42L, 1L));
+        () -> linkService.unlinkUpUserAndBankAccount(42L, 1L));
 
     assertEquals("Unable to unlink up due crew member absence" , e.getMessage());
   }
@@ -78,7 +78,7 @@ class CreditCardServiceTest {
   @Test
   void unlinkUpCrewMemberAndFlightWhenProvidedNonExistentFlightId() {
     Exception e = assertThrows(NotFoundException.class,
-        () -> linkService.unlinkUpUserAndCreditCard(1L, 42L));
+        () -> linkService.unlinkUpUserAndBankAccount(1L, 42L));
 
     assertEquals("Unable to unlink up due flight absence", e.getMessage());
   }
@@ -86,14 +86,14 @@ class CreditCardServiceTest {
   @Test
   void unlinkUpCrewMemberAndFlightWhenLinkIsAbsent() {
     Exception e = assertThrows(NotFoundException.class,
-        () -> linkService.unlinkUpUserAndCreditCard(4L, 2L));
+        () -> linkService.unlinkUpUserAndBankAccount(4L, 2L));
 
     assertEquals("The link between these crew member and flight is absent", e.getMessage());
   }
 
   @Test
   void unlinkUpCrewMemberAndFlightWorksProperly() {
-    linkService.unlinkUpUserAndCreditCard(1L, 1L);
+    linkService.unlinkUpUserAndBankAccount(1L, 1L);
 
     User user = userService.findUserById(1L).orElseThrow();
     List<BankAccount> credit_cards = userService.findBankAccountsOfUser(user);

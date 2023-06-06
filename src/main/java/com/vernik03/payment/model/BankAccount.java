@@ -40,13 +40,13 @@ public class BankAccount {
   @Column(name = "is_blocked", nullable = false)
   private Boolean is_blocked;
 
-  @ManyToMany(mappedBy = "bank_accounts")
+  @ManyToMany(mappedBy = "bankAccounts")
   private Set<User> users = new HashSet<>();
 
   @PreRemove
   private void removeFlightFromCrewMembers() {
     for (User user : users) {
-      user.getBank_accounts().remove(this);
+      user.getBankAccounts().remove(this);
     }
   }
 

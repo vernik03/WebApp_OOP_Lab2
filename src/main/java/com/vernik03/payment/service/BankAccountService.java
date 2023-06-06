@@ -42,7 +42,7 @@ public class BankAccountService {
   }
 
   public List<User> findUserOfBankAccount(BankAccount bankAccount) {
-    return userRepository.findUserByBankAccount(bankAccount);
+    return userRepository.findUserByBankAccounts(bankAccount);
   }
 
   @Transactional

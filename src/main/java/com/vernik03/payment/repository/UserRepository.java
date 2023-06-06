@@ -13,6 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
   long deleteUserById(Long id);
 
-  List<User> findUserByBankAccount(BankAccount bankAccount);
+  List<User> findUserByBankAccounts(BankAccount bankAccount);
 
 }

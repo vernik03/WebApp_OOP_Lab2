@@ -42,7 +42,7 @@ class UserControllerTest {
   private UserService userService;
 
   @Autowired
-  private CrewMemberController crewMemberController;
+  private UserController userController;
 
   @Autowired
   private TestRestTemplate restTemplate;
@@ -50,7 +50,7 @@ class UserControllerTest {
   @Test
   void contextLoads() {
     assertNotNull(userService);
-    assertNotNull(crewMemberController);
+    assertNotNull(userController);
     assertNotNull(restTemplate);
   }
 

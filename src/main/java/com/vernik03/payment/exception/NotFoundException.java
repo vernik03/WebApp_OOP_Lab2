@@ -4,13 +4,13 @@ import org.springframework.http.HttpStatus;
 
 public class NotFoundException extends CommonException {
 
-  public static final ErrorMessage CREW_MEMBER_NOT_FOUND = new ErrorMessage(
+  public static final ErrorMessage USER_NOT_FOUND = new ErrorMessage(
       HttpStatus.NOT_FOUND,
       "crew_member_not_found",
       "Crew member with this id not found"
   );
 
-  public static final ErrorMessage FLIGHT_NOT_FOUND = new ErrorMessage(
+  public static final ErrorMessage BANK_ACCOUNT_NOT_FOUND = new ErrorMessage(
       HttpStatus.NOT_FOUND,
       "flight_not_found",
       "Flight with this id not found"

@@ -27,23 +27,23 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class FlightController {
+public class BankAccountController {
 
   private final BankAccountService bankAccountService;
   private final CreditCardService linkService;
   private final ModelMapper modelMapper;
 
   @Autowired
-  public FlightController(BankAccountService bankAccountService,
-                          CreditCardService linkService,
-                          ModelMapper modelMapper) {
+  public BankAccountController(BankAccountService bankAccountService,
+                               CreditCardService linkService,
+                               ModelMapper modelMapper) {
     this.bankAccountService = bankAccountService;
     this.linkService = linkService;
     this.modelMapper = modelMapper;
   }
 
-  @GetMapping("/credit_cards")
-  public BankAccountsListDto getListOfFlights() {
+  @GetMapping("/bank-accounts")
+  public BankAccountsListDto getListOfBankAccounts() {
     List<BankAccount> entities = bankAccountService.findAll();
 
     List<BankAccountsWithoutUserDto> dtos = entities.stream()
@@ -53,32 +53,31 @@ public class FlightController {
     return new BankAccountsListDto(dtos);
   }
 
-  @GetMapping("/credit_cards/{flight-id}")
-  public BankAccountResponseDto getFlightById(@PathVariable("flight-id") Long id) {
-    Optional<BankAccount> flightOptional = bankAccountService.findBankAccountById(id);
+  @GetMapping("/bank-accounts/{bank-account-id}")
+  public BankAccountResponseDto getBankAccountById(@PathVariable("bank-account-id") Long id) {
+    Optional<BankAccount> bankAccountOptional = bankAccountService.findBankAccountById(id);
 
-    if (flightOptional.isEmpty()) {
-      throw new NotFoundException(NotFoundException.FLIGHT_NOT_FOUND);
+    if (bankAccountOptional.isEmpty()) {
+      throw new NotFoundException(NotFoundException.BANK_ACCOUNT_NOT_FOUND);
     }
 
-    return mapAndFetchCrewMembers(flightOptional.get());
+    return mapAndFetchUsers(bankAccountOptional.get());
   }
 
-  @PostMapping("/credit_cards")
+  @PostMapping("/bank-accounts")
   @ResponseStatus(HttpStatus.CREATED)
-  public BankAccountResponseDto createFlight(@Valid @RequestBody BankAccountForm form) {
+  public BankAccountResponseDto createBankAccount(@Valid @RequestBody BankAccountForm form) {
     BankAccount toSave = modelMapper.map(form, BankAccount.class);
     BankAccount response = bankAccountService.saveBankAccount(toSave);
 
-    //we don't use mapAndFetchCrewMembers(), because crew members list is empty after creation
     return modelMapper.map(response, BankAccountResponseDto.class);
   }
 
-  @PutMapping("/credit_cards/{flight-id}")
-  public BankAccountResponseDto updateFlight(@PathVariable("flight-id") Long id,
-                                             @Valid @RequestBody BankAccountForm form) {
+  @PutMapping("/bank-accounts/{bank-account-id}")
+  public BankAccountResponseDto updateBankAccount(@PathVariable("bank-account-id") Long id,
+                                                  @Valid @RequestBody BankAccountForm form) {
     if (!bankAccountService.existsById(id)) {
-      throw new NotFoundException(NotFoundException.FLIGHT_NOT_FOUND);
+      throw new NotFoundException(NotFoundException.BANK_ACCOUNT_NOT_FOUND);
     }
 
     BankAccount toUpdate = modelMapper.map(form, BankAccount.class);
@@ -86,46 +85,46 @@ public class FlightController {
 
     BankAccount response = bankAccountService.updateBankAccount(toUpdate);
 
-    return mapAndFetchCrewMembers(response);
+    return mapAndFetchUsers(response);
   }
 
-  @DeleteMapping("/credit_cards/{flight-id}")
+  @DeleteMapping("/bank-accounts/{bank-account-id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteFlight(@PathVariable("flight-id") Long id) {
+  public void deleteBankAccount(@PathVariable("bank-account-id") Long id) {
     boolean isDeleted = bankAccountService.deleteBankAccountById(id);
 
     if (!isDeleted) {
-      throw new NotFoundException(NotFoundException.FLIGHT_NOT_FOUND);
+      throw new NotFoundException(NotFoundException.BANK_ACCOUNT_NOT_FOUND);
     }
   }
 
-  @PostMapping("/credit_cards/{flight-id}/crew-members")
+  @PostMapping("/bank-accounts/{bank-account-id}/users")
   @ResponseStatus(HttpStatus.CREATED)
-  public BankAccountResponseDto linkUpCrewMember(@PathVariable("flight-id") Long flightId,
-                                                 @Valid @RequestBody IdToLinkUpDto crewMemberId) {
-    //existence validation is here
-    linkService.linkUpUserAndBankAccount(crewMemberId.getIdToLink(), flightId);
+  public BankAccountResponseDto linkUpUser(@PathVariable("bank-account-id") Long bankAccountId,
+                                           @Valid @RequestBody IdToLinkUpDto userId) {
 
-    Optional<BankAccount> flightOptional = bankAccountService.findBankAccountById(flightId);
+    linkService.linkUpUserAndBankAccount(userId.getIdToLink(), bankAccountId);
 
-    return mapAndFetchCrewMembers(flightOptional.get());
+    Optional<BankAccount> bankAccountOptional = bankAccountService.findBankAccountById(bankAccountId);
+
+    return mapAndFetchUsers(bankAccountOptional.get());
   }
 
-  @DeleteMapping("/credit_cards/{flight-id}/crew-members/{crew-member-id}")
+  @DeleteMapping("/bank-accounts/{bank-account-id}/users/{user-id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void unlinkUpCrewMember(@PathVariable("flight-id") Long flightId,
-                                 @PathVariable("crew-member-id") Long crewMemberId) {
-    linkService.unlinkUpUserAndCreditCard(crewMemberId, flightId);
+  public void unlinkUpUser(@PathVariable("bank-account-id") Long bankAccountId,
+                           @PathVariable("user-id") Long userId) {
+    linkService.unlinkUpUserAndBankAccount(userId, bankAccountId);
   }
 
-  private BankAccountResponseDto mapAndFetchCrewMembers(BankAccount bankAccount) {
+  private BankAccountResponseDto mapAndFetchUsers(BankAccount bankAccount) {
     List<User> userEntities = bankAccountService.findUserOfBankAccount(bankAccount);
-    List<UserWithoutAccountsDto> crewMembersDtos = userEntities.stream()
+    List<UserWithoutAccountsDto> usersDtos = userEntities.stream()
         .map(e -> modelMapper.map(e, UserWithoutAccountsDto.class))
         .toList();
 
     BankAccountResponseDto resultDto = modelMapper.map(bankAccount, BankAccountResponseDto.class);
-    resultDto.setUsers(crewMembersDtos);
+    resultDto.setUsers(usersDtos);
 
     return resultDto;
   }

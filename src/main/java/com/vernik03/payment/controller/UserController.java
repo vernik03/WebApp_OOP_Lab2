@@ -27,23 +27,23 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CrewMemberController {
+public class UserController {
 
   private final UserService userService;
   private final CreditCardService linkService;
   private final ModelMapper modelMapper;
 
   @Autowired
-  public CrewMemberController(UserService userService,
-                              CreditCardService linkService,
-                              ModelMapper modelMapper) {
+  public UserController(UserService userService,
+                        CreditCardService linkService,
+                        ModelMapper modelMapper) {
     this.userService = userService;
     this.linkService = linkService;
     this.modelMapper = modelMapper;
   }
 
-  @GetMapping("/crew-members")
-  public UsersListDto getListOfCrewMembers() {
+  @GetMapping("/users")
+  public UsersListDto getListOfUsers() {
     List<User> entities = userService.findAll();
 
     List<UserWithoutAccountsDto> dtos = entities.stream()
@@ -53,32 +53,31 @@ public class CrewMemberController {
     return new UsersListDto(dtos);
   }
 
-  @GetMapping("/crew-members/{crew-member-id}")
-  public UserResponseDto getCrewMemberById(@PathVariable("crew-member-id") Long id) {
-    Optional<User> crewMemberOptional = userService.findUserById(id);
+  @GetMapping("/users/{user-id}")
+  public UserResponseDto getUserById(@PathVariable("user-id") Long id) {
+    Optional<User> userOptional = userService.findUserById(id);
 
-    if (crewMemberOptional.isEmpty()) {
-      throw new NotFoundException(NotFoundException.CREW_MEMBER_NOT_FOUND);
+    if (userOptional.isEmpty()) {
+      throw new NotFoundException(NotFoundException.USER_NOT_FOUND);
     }
 
-    return mapAndFetchFlights(crewMemberOptional.get());
+    return mapAndFetchBankAccounts(userOptional.get());
   }
 
-  @PostMapping("/crew-members")
+  @PostMapping("/users")
   @ResponseStatus(HttpStatus.CREATED)
-  public UserResponseDto createCrewMember(@Valid @RequestBody UserForm form) {
+  public UserResponseDto createUser(@Valid @RequestBody UserForm form) {
     User toSave = modelMapper.map(form, User.class);
     User response = userService.saveUser(toSave);
 
-    //we don't use mapAndFetchFlights(), because credit_cards list is empty after creation
     return modelMapper.map(response, UserResponseDto.class);
   }
 
-  @PutMapping("/crew-members/{crew-member-id}")
-  public UserResponseDto updateCrewMember(@PathVariable("crew-member-id") Long id,
-                                          @Valid @RequestBody UserForm form) {
+  @PutMapping("/users/{user-id}")
+  public UserResponseDto updateUser(@PathVariable("user-id") Long id,
+                                    @Valid @RequestBody UserForm form) {
     if (!userService.existsById(id)) {
-      throw new NotFoundException(NotFoundException.CREW_MEMBER_NOT_FOUND);
+      throw new NotFoundException(NotFoundException.USER_NOT_FOUND);
     }
 
     User toUpdate = modelMapper.map(form, User.class);
@@ -86,48 +85,48 @@ public class CrewMemberController {
 
     User response = userService.updateUser(toUpdate);
 
-    return mapAndFetchFlights(response);
+    return mapAndFetchBankAccounts(response);
   }
 
-  @DeleteMapping("/crew-members/{crew-member-id}")
+  @DeleteMapping("/users/{user-id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteCrewMember(@PathVariable("crew-member-id") Long id) {
+  public void deleteUser(@PathVariable("user-id") Long id) {
     boolean isDeleted = userService.deleteUserById(id);
 
     if (!isDeleted) {
-      throw new NotFoundException(NotFoundException.CREW_MEMBER_NOT_FOUND);
+      throw new NotFoundException(NotFoundException.USER_NOT_FOUND);
     }
   }
 
-  @PostMapping("/crew-members/{crew-member-id}/credit_cards")
+  @PostMapping("/users/{user-id}/bank-accounts")
   @ResponseStatus(HttpStatus.CREATED)
-  public UserResponseDto linkUpFlight(@PathVariable("crew-member-id") Long crewMemberId,
-                                      @Valid @RequestBody IdToLinkUpDto flightId) {
+  public UserResponseDto linkUpBankAccount(@PathVariable("user-id") Long userId,
+                                           @Valid @RequestBody IdToLinkUpDto bankAccountId) {
     //existence validation is here
-    linkService.linkUpUserAndBankAccount(crewMemberId, flightId.getIdToLink());
+    linkService.linkUpUserAndBankAccount(userId, bankAccountId.getIdToLink());
 
-    Optional<User> crewMemberOptional = userService.findUserById(crewMemberId);
+    Optional<User> userOptional = userService.findUserById(userId);
 
-    return mapAndFetchFlights(crewMemberOptional.get());
+    return mapAndFetchBankAccounts(userOptional.get());
   }
 
-  @DeleteMapping("/crew-members/{crew-member-id}/credit_cards/{flight-id}")
+  @DeleteMapping("/users/{user-id}/bank-accounts/{bank-account-id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void unlinkUpFlight(@PathVariable("crew-member-id") Long crewMemberId,
-                             @PathVariable("flight-id") Long flightId) {
-    linkService.unlinkUpUserAndCreditCard(crewMemberId, flightId);
+  public void unlinkUpBankAccount(@PathVariable("user-id") Long userId,
+                                  @PathVariable("bank-account-id") Long bankAccountId) {
+    linkService.unlinkUpUserAndBankAccount(userId, bankAccountId);
   }
 
-  private UserResponseDto mapAndFetchFlights(User user) {
+  private UserResponseDto mapAndFetchBankAccounts(User user) {
     List<BankAccount> bankAccountEntities
         = userService.findBankAccountsOfUser(user);
-    List<BankAccountsWithoutUserDto> flightDtos = bankAccountEntities.stream()
+    List<BankAccountsWithoutUserDto> bankAccountDtos = bankAccountEntities.stream()
         .map(e -> modelMapper.map(e, BankAccountsWithoutUserDto.class))
         .toList();
 
     UserResponseDto resultDto
         = modelMapper.map(user, UserResponseDto.class);
-    resultDto.setBank_accounts(flightDtos);
+    resultDto.setBank_accounts(bankAccountDtos);
 
     return resultDto;
   }

@@ -44,11 +44,11 @@ public class CreditCardService {
     }
 
     bankAccount.getUsers().add(user);
-    user.getBank_accounts().add(bankAccount);
+    user.getBankAccounts().add(bankAccount);
   }
 
   @Transactional
-  public void unlinkUpUserAndCreditCard(Long userId, Long bankAccountId) {
+  public void unlinkUpUserAndBankAccount(Long userId, Long bankAccountId) {
     User user = userRepository
         .findById(userId)
         .orElseThrow(
@@ -62,7 +62,7 @@ public class CreditCardService {
         );
 
     bankAccount.getUsers().remove(user);
-    boolean isUnlinked = user.getBank_accounts().remove(bankAccount);
+    boolean isUnlinked = user.getBankAccounts().remove(bankAccount);
 
     if (!isUnlinked) {
       throw new NotFoundException(NotFoundException.LINK_IS_ABSENT);
@@ -70,7 +70,7 @@ public class CreditCardService {
   }
 
   private boolean checkLinkExistence(User user, BankAccount bankAccount) {
-    return user.getBank_accounts().contains(bankAccount);
+    return user.getBankAccounts().contains(bankAccount);
   }
 
 }

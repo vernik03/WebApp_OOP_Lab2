@@ -6,44 +6,44 @@ public class NotFoundException extends CommonException {
 
   public static final ErrorMessage USER_NOT_FOUND = new ErrorMessage(
       HttpStatus.NOT_FOUND,
-      "crew_member_not_found",
+      "user_not_found",
       "Crew member with this id not found"
   );
 
   public static final ErrorMessage BANK_ACCOUNT_NOT_FOUND = new ErrorMessage(
       HttpStatus.NOT_FOUND,
-      "flight_not_found",
+      "bank_account_not_found",
       "Flight with this id not found"
   );
 
   public static final ErrorMessage USER_NOT_FOUND_TO_LINK_UP = new ErrorMessage(
       HttpStatus.NOT_FOUND,
-      "crew_member_not_found_to_link_up",
+      "user_not_found_to_link_up",
       "Unable to link up due crew member absence"
   );
 
   public static final ErrorMessage BANK_ACCOUNT_NOT_FOUND_TO_LINK_UP = new ErrorMessage(
       HttpStatus.NOT_FOUND,
-      "flight_not_found_to_link_up",
-      "Unable to link up due flight absence"
+      "bank_account_not_found_to_link_up",
+      "Unable to link up due bank_account absence"
   );
 
   public static final ErrorMessage USER_NOT_FOUND_TO_UNLINK_UP = new ErrorMessage(
       HttpStatus.NOT_FOUND,
-      "crew_member_not_found_to_unlink_up",
+      "user_not_found_to_unlink_up",
       "Unable to unlink up due crew member absence"
   );
 
   public static final ErrorMessage BANK_ACCOUNT_NOT_FOUND_TO_UNLINK_UP = new ErrorMessage(
       HttpStatus.NOT_FOUND,
-      "flight_not_found_to_unlink_up",
-      "Unable to unlink up due flight absence"
+      "bank_account_not_found_to_unlink_up",
+      "Unable to unlink up due bank_account absence"
   );
 
   public static final ErrorMessage LINK_IS_ABSENT = new ErrorMessage(
       HttpStatus.NOT_FOUND,
       "link_is_absent",
-      "The link between these crew member and flight is absent"
+      "The link between these crew member and bank_account is absent"
   );
 
   public NotFoundException(ErrorMessage errorMessage) {

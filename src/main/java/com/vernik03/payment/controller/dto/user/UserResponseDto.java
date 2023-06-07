@@ -20,6 +20,6 @@ public class UserResponseDto {
   private Boolean is_admin;
   private String login;
   private String password;
-  private List<BankAccountsWithoutUserDto> bank_accounts;
+  private List<BankAccountsWithoutUserDto> bankAccounts;
 
 }

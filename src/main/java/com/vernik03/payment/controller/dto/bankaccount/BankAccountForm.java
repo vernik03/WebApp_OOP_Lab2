@@ -16,12 +16,12 @@ public class BankAccountForm {
 
   @NotBlank(message = "card_number_is_blank:Card numbe can not be blank")
   @Size(max = 16, message = "card_number_max_size_limit:Card number max size is 16 characters")
-  private String card_number;
+  private String cardNumber;
 
   @NotNull(message = "balance_is_blank:Balance can not be blank")
   private Double balance;
 
   @NotNull(message = "is_blocked_is_empty:Blocked info can not be empty")
-  private Boolean is_blocked;
+  private Boolean isBlocked;
 
 }

@@ -58,15 +58,15 @@ public class BankAccountController {
     return mapAndFetchUsers(bankAccountOptional.get());
   }
 
-  @PostMapping("/bank-accounts/{bank-account-id}/save-money/{amount}")
-  public BankAccountResponseDto saveMoney(@PathVariable("bank-account-id") Long id,
-                                          @PathVariable("amount") Double amount) {
-      Optional<BankAccount> bankAccountOptional = bankAccountService.findBankAccountById(id);
+  @PostMapping("/bank-accounts/{bank-account-number}/pay-money/{amount}")
+  public BankAccountResponseDto payMoney(@PathVariable("bank-account-number") String number,
+                                         @PathVariable("amount") Double amount) {
+      Optional<BankAccount> bankAccountOptional = bankAccountService.findBankAccountByCardNumber(number);
 
       checkLogIn();
       checkBankAccountOwner(bankAccountOptional.get());
 
-      if (bankAccountOptional.get().getIs_blocked()) {
+      if (bankAccountOptional.get().getIsBlocked()) {
         throw new IllegalArgumentException("Bank account is blocked");
       }
       if (bankAccountOptional.isEmpty()) {
@@ -83,20 +83,20 @@ public class BankAccountController {
       return mapAndFetchUsers(response);
   }
 
-  @PostMapping("/bank-accounts/{bank-account-id}/send-money/{bank-account-id2}/{amount}")
-  public BankAccountResponseDto sendMoney(@PathVariable("bank-account-id") Long id,
-                                          @PathVariable("bank-account-id2") Long id2,
+  @PostMapping("/bank-accounts/{bank-account-number}/send-money/{bank-account-number2}/{amount}")
+  public BankAccountResponseDto sendMoney(@PathVariable("bank-account-number") String number,
+                                          @PathVariable("bank-account-number2") String number2,
                                           @PathVariable("amount") Double amount) {
-    Optional<BankAccount> bankAccountOptional = bankAccountService.findBankAccountById(id);
-    Optional<BankAccount> bankAccountOptional2 = bankAccountService.findBankAccountById(id2);
+    Optional<BankAccount> bankAccountOptional = bankAccountService.findBankAccountByCardNumber(number);
+    Optional<BankAccount> bankAccountOptional2 = bankAccountService.findBankAccountByCardNumber(number2);
 
     checkLogIn();
     checkBankAccountOwner(bankAccountOptional.get());
 
-    if (bankAccountOptional.get().getIs_blocked()) {
+    if (bankAccountOptional.get().getIsBlocked()) {
       throw new IllegalArgumentException("Bank account source is blocked");
     }
-    if (bankAccountOptional2.get().getIs_blocked()) {
+    if (bankAccountOptional2.get().getIsBlocked()) {
       throw new IllegalArgumentException("Bank account target is blocked");
     }
     if (bankAccountOptional.isEmpty()) {
@@ -119,9 +119,9 @@ public class BankAccountController {
     return mapAndFetchUsers(response);
   }
 
-  @PostMapping("/bank-accounts/{bank-account-id}/block")
-  public void blockAccount(@PathVariable("bank-account-id") Long id) {
-    BankAccount bankAccount = bankAccountService.findBankAccountById(id).get();
+  @PostMapping("/bank-accounts/{bank-account-number}/block")
+  public void blockAccount(@PathVariable("bank-account-number") String number) {
+    BankAccount bankAccount = bankAccountService.findBankAccountByCardNumber(number).get();
 
     checkLogIn();
     checkBankAccountOwner(bankAccount);
@@ -129,9 +129,9 @@ public class BankAccountController {
     bankAccountService.blockBankAccount(bankAccount.getId());
   }
 
-  @PostMapping("/bank-accounts/{bank-account-id}/unblock")
-  public void unblockAccount(@PathVariable("bank-account-id") Long id) {
-      BankAccount bankAccount = bankAccountService.findBankAccountById(id).get();
+  @PostMapping("/bank-accounts/{bank-account-number}/unblock")
+  public void unblockAccount(@PathVariable("bank-account-number") String  number) {
+      BankAccount bankAccount = bankAccountService.findBankAccountByCardNumber(number).get();
 
       checkLogIn();
       checkAdmin();
@@ -146,7 +146,7 @@ public class BankAccountController {
   }
 
   private void checkBankAccountOwner(BankAccount bankAccount) {
-    if (bankAccount.getUser().getId().equals(logIn.getLoginedUser().getId())) {
+    if (!bankAccount.getUser().getId().equals(logIn.getLoginedUser().getId())) {
       throw new IllegalArgumentException("You are not owner of this bank account");
     }
   }

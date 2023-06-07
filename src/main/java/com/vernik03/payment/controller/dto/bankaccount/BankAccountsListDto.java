@@ -12,6 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class BankAccountsListDto {
 
-  private List<BankAccountsWithoutUserDto> bank_accounts;
+  private List<BankAccountsWithoutUserDto> bankAccounts;
 
 }

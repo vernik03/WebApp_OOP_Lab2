@@ -2,9 +2,8 @@ package com.vernik03.payment.model;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,13 +24,13 @@ public class BankAccount {
   private Long id;
 
   @Column(name = "card_number", nullable = false)
-  private String card_number;
+  private String cardNumber;
 
   @Column(name = "balance", nullable = false)
   private Double balance;
 
   @Column(name = "is_blocked", nullable = false)
-  private Boolean is_blocked;
+  private Boolean isBlocked;
 
   @ManyToOne()
   @JoinColumn(name = "fk_user_id", referencedColumnName = "id")

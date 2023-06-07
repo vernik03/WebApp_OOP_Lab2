@@ -4,36 +4,43 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb60ecd3-150a-452c-8b76-95744bf44908" name="Changes" comment="database changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/security/LogIn.java" afterDir="false" />
+    <list default="true" id="eb60ecd3-150a-452c-8b76-95744bf44908" name="Changes" comment="add money operations">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/bd7a9ec3-f8bb-43b0-9ed0-84bb5156ffcd.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/bd7a9ec3-f8bb-43b0-9ed0-84bb5156ffcd.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bd7a9ec3-f8bb-43b0-9ed0-84bb5156ffcd/storage_v2/_src_/database/PaymentDB_v2.tyeZ6g/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/bd7a9ec3-f8bb-43b0-9ed0-84bb5156ffcd/storage_v2/_src_/database/PaymentDB_v2.tyeZ6g/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/postman_collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/postman_collection.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/BankAccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/BankAccountController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/dto/user/UserForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/dto/user/UserForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/exception/ValidException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/exception/ValidException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/dto/IdToLinkUpDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/dto/bankaccount/BankAccountForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/dto/bankaccount/BankAccountForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/dto/bankaccount/BankAccountResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/dto/bankaccount/BankAccountResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/dto/bankaccount/BankAccountsListDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/dto/bankaccount/BankAccountsListDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/dto/bankaccount/BankAccountsWithoutUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/dto/bankaccount/BankAccountsWithoutUserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/dto/user/UserResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/dto/user/UserResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/exception/NotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/exception/NotFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/model/BankAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/model/BankAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/model/CreditCard.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/repository/BankAccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/repository/BankAccountRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/repository/CreditCardRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/service/BankAccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/service/BankAccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/service/CreditCardService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/v1.0/changelog-v1.0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/v1.0/changelog-v1.0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/payment/AirportManagementApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/payment/controller/BankAccountControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/payment/controller/UserControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/payment/service/BankAccountServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/payment/service/CreditCardServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/payment/service/UserServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/clear.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/test-init.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/controller/BankAccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/vernik03/payment/controller/BankAccountController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/vernik03/payment/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/controller/dto/user/UserForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/vernik03/payment/controller/dto/user/UserForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/exception/NotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/vernik03/payment/exception/NotFoundException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/exception/ValidException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/vernik03/payment/exception/ValidException.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/model/BankAccount$BankAccountBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/vernik03/payment/model/BankAccount$BankAccountBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/model/BankAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/vernik03/payment/model/BankAccount.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/model/CreditCard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/model/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/vernik03/payment/model/User$UserBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/vernik03/payment/model/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/repository/BankAccountRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/vernik03/payment/repository/BankAccountRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/service/CreditCardService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/vernik03/payment/service/CreditCardService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/repository/CreditCardRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/vernik03/payment/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/service/BankAccountService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/vernik03/payment/service/BankAccountService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/service/CreditCardService.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/vernik03/payment/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/db/v1.0/changelog-v1.0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/v1.0/changelog-v1.0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/init.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +123,8 @@
       <workItem from="1686043510616" duration="9756000" />
       <workItem from="1686054103768" duration="10689000" />
       <workItem from="1686077518918" duration="15817000" />
-      <workItem from="1686128476494" duration="6071000" />
+      <workItem from="1686128476494" duration="6682000" />
+      <workItem from="1686135803012" duration="4419000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1686092045698</created>
@@ -139,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686096201589</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add money operations">
+      <created>1686134969360</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1686134969360</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,6 +175,7 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="all works but some changes required" />
     <MESSAGE value="database changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="database changes" />
+    <MESSAGE value="add money operations" />
+    <option name="LAST_COMMIT_MESSAGE" value="add money operations" />
   </component>
 </project>

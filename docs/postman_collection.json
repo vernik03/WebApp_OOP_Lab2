@@ -116,7 +116,7 @@
 					"response": []
 				},
 				{
-					"name": "Link up flight",
+					"name": "Link up bank_account",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -144,7 +144,7 @@
 					"response": []
 				},
 				{
-					"name": "Unlink up flight",
+					"name": "Unlink up bank_account",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -186,7 +186,7 @@
 					"response": []
 				},
 				{
-					"name": "Get flight by id",
+					"name": "Get bank_account by id",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -204,7 +204,7 @@
 					"response": []
 				},
 				{
-					"name": "Create new flight",
+					"name": "Create new bank_account",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -230,7 +230,7 @@
 					"response": []
 				},
 				{
-					"name": "Update flight",
+					"name": "Update bank_account",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -257,7 +257,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete flight by id",
+					"name": "Delete bank_account by id",
 					"request": {
 						"method": "DELETE",
 						"header": [],

@@ -15,9 +15,9 @@ import lombok.Setter;
 public class BankAccountResponseDto {
 
   private Long id;
-  private String card_number;
+  private String cardNumber;
   private Double balance;
-  private Boolean is_blocked;
+  private Boolean isBlocked;
   private List<UserWithoutAccountsDto> users;
 
 }

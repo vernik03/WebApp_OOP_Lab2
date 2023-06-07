@@ -1,8 +1,6 @@
 package com.vernik03.payment.service;
 
-import com.vernik03.payment.exception.ErrorMessage;
 import com.vernik03.payment.exception.NotFoundException;
-import com.vernik03.payment.exception.ValidException;
 import com.vernik03.payment.model.BankAccount;
 import com.vernik03.payment.model.User;
 import com.vernik03.payment.repository.UserRepository;
@@ -37,6 +35,10 @@ public class BankAccountService {
     return bankAccountRepository.findById(id);
   }
 
+  public Optional<BankAccount> findBankAccountByCardNumber(String number) {
+    return bankAccountRepository.findByCardNumber(number);
+  }
+
   public boolean existsById(Long id) {
     return bankAccountRepository.existsById(id);
   }
@@ -58,13 +60,13 @@ public class BankAccountService {
 
   public void blockBankAccount(Long bankAccountId) {
     BankAccount bankAccount = bankAccountRepository.findById(bankAccountId).orElseThrow();
-    bankAccount.setIs_blocked(true);
+    bankAccount.setIsBlocked(true);
     bankAccountRepository.save(bankAccount);
   }
 
   public void unblockBankAccount(Long bankAccountId) {
     BankAccount bankAccount = bankAccountRepository.findById(bankAccountId).orElseThrow();
-    bankAccount.setIs_blocked(false);
+    bankAccount.setIsBlocked(false);
     bankAccountRepository.save(bankAccount);
   }
 

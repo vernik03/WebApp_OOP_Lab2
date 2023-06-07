@@ -6,6 +6,7 @@ import com.vernik03.payment.controller.dto.user.UserWithoutAccountsDto;
 import com.vernik03.payment.controller.dto.user.UsersListDto;
 import com.vernik03.payment.controller.dto.bankaccount.BankAccountsWithoutUserDto;
 import com.vernik03.payment.exception.NotFoundException;
+import com.vernik03.payment.exception.ValidException;
 import com.vernik03.payment.model.User;
 import com.vernik03.payment.model.BankAccount;
 import com.vernik03.payment.service.BankAccountService;
@@ -62,13 +63,14 @@ public class UserController {
     return mapAndFetchBankAccounts(userOptional.get());
   }
 
-  @PostMapping("/login/{login}/{password}")
-  public void loginUser(@Valid @RequestBody UserForm form) {
+  @PostMapping("/login")
+  public UserResponseDto loginUser(@Valid @RequestBody UserForm form) {
     User user = userService.findUserByLogin(form.getLogin());
-    if (user.getPassword().equals(form.getPassword())) {
-      throw new NotFoundException(NotFoundException.USER_NOT_FOUND);
+    if (!user.getPassword().equals(form.getPassword())) {
+      throw new ValidException(ValidException.INVALID_PASSWORD);
     }
     logIn.setLoginedUser(user);
+    return mapAndFetchBankAccounts(user);
   }
 
   private UserResponseDto mapAndFetchBankAccounts(User user) {
@@ -80,7 +82,7 @@ public class UserController {
 
     UserResponseDto resultDto
         = modelMapper.map(user, UserResponseDto.class);
-    resultDto.setBank_accounts(bankAccountDtos);
+    resultDto.setBankAccounts(bankAccountDtos);
 
     return resultDto;
   }

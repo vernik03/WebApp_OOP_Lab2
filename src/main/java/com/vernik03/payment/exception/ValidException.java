@@ -4,11 +4,17 @@ import org.springframework.http.HttpStatus;
 
 public class ValidException extends CommonException {
 
-  public static final ErrorMessage LINK_ALREADY_EXISTS = new ErrorMessage(
+  public static final ErrorMessage INVALID_PASSWORD = new ErrorMessage(
       HttpStatus.BAD_REQUEST,
-      "link_already_exists",
-      "Crew member and flight already linked up"
+      "invalid_password",
+      "Wrong password"
   );
+
+    public static final ErrorMessage INVALID_EMAIL = new ErrorMessage(
+        HttpStatus.BAD_REQUEST,
+        "invalid_email",
+        "Wrong email"
+    );
 
   public ValidException(ErrorMessage errorMessage) {
     super(errorMessage);

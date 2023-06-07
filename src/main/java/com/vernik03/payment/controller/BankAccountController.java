@@ -1,44 +1,38 @@
 package com.vernik03.payment.controller;
 
-import com.vernik03.payment.controller.dto.IdToLinkUpDto;
 import com.vernik03.payment.controller.dto.user.UserWithoutAccountsDto;
 import com.vernik03.payment.model.User;
 import com.vernik03.payment.model.BankAccount;
-import com.vernik03.payment.service.CreditCardService;
 import com.vernik03.payment.service.BankAccountService;
-import com.vernik03.payment.controller.dto.bankaccount.BankAccountForm;
 import com.vernik03.payment.controller.dto.bankaccount.BankAccountResponseDto;
 import com.vernik03.payment.controller.dto.bankaccount.BankAccountsWithoutUserDto;
 import com.vernik03.payment.controller.dto.bankaccount.BankAccountsListDto;
 import com.vernik03.payment.exception.NotFoundException;
-import jakarta.validation.Valid;
+
 import java.util.List;
 import java.util.Optional;
+
+import com.vernik03.payment.security.LogIn;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BankAccountController {
 
   private final BankAccountService bankAccountService;
-  private final CreditCardService linkService;
+
+  private final LogIn logIn;
   private final ModelMapper modelMapper;
 
   @Autowired
   public BankAccountController(BankAccountService bankAccountService,
-                               CreditCardService linkService,
-                               ModelMapper modelMapper) {
+                               LogIn logIn, ModelMapper modelMapper) {
     this.bankAccountService = bankAccountService;
-    this.linkService = linkService;
+    this.logIn = logIn;
     this.modelMapper = modelMapper;
   }
 
@@ -64,58 +58,105 @@ public class BankAccountController {
     return mapAndFetchUsers(bankAccountOptional.get());
   }
 
-  @PostMapping("/bank-accounts")
-  @ResponseStatus(HttpStatus.CREATED)
-  public BankAccountResponseDto createBankAccount(@Valid @RequestBody BankAccountForm form) {
-    BankAccount toSave = modelMapper.map(form, BankAccount.class);
-    BankAccount response = bankAccountService.saveBankAccount(toSave);
+  @PostMapping("/bank-accounts/{bank-account-id}/save-money/{amount}")
+  public BankAccountResponseDto saveMoney(@PathVariable("bank-account-id") Long id,
+                                          @PathVariable("amount") Double amount) {
+      Optional<BankAccount> bankAccountOptional = bankAccountService.findBankAccountById(id);
 
-    return modelMapper.map(response, BankAccountResponseDto.class);
+      checkLogIn();
+      checkBankAccountOwner(bankAccountOptional.get());
+
+      if (bankAccountOptional.get().getIs_blocked()) {
+        throw new IllegalArgumentException("Bank account is blocked");
+      }
+      if (bankAccountOptional.isEmpty()) {
+      throw new NotFoundException(NotFoundException.BANK_ACCOUNT_NOT_FOUND);
+      }
+
+      BankAccount bankAccount = bankAccountOptional.get();
+      if (bankAccount.getBalance() + amount < 0) {
+      throw new IllegalArgumentException("Not enough money");
+      }
+      bankAccount.setBalance(bankAccount.getBalance() + amount);
+      BankAccount response = bankAccountService.updateBankAccount(bankAccount);
+
+      return mapAndFetchUsers(response);
   }
 
-  @PutMapping("/bank-accounts/{bank-account-id}")
-  public BankAccountResponseDto updateBankAccount(@PathVariable("bank-account-id") Long id,
-                                                  @Valid @RequestBody BankAccountForm form) {
-    if (!bankAccountService.existsById(id)) {
+  @PostMapping("/bank-accounts/{bank-account-id}/send-money/{bank-account-id2}/{amount}")
+  public BankAccountResponseDto sendMoney(@PathVariable("bank-account-id") Long id,
+                                          @PathVariable("bank-account-id2") Long id2,
+                                          @PathVariable("amount") Double amount) {
+    Optional<BankAccount> bankAccountOptional = bankAccountService.findBankAccountById(id);
+    Optional<BankAccount> bankAccountOptional2 = bankAccountService.findBankAccountById(id2);
+
+    checkLogIn();
+    checkBankAccountOwner(bankAccountOptional.get());
+
+    if (bankAccountOptional.get().getIs_blocked()) {
+      throw new IllegalArgumentException("Bank account source is blocked");
+    }
+    if (bankAccountOptional2.get().getIs_blocked()) {
+      throw new IllegalArgumentException("Bank account target is blocked");
+    }
+    if (bankAccountOptional.isEmpty()) {
       throw new NotFoundException(NotFoundException.BANK_ACCOUNT_NOT_FOUND);
     }
 
-    BankAccount toUpdate = modelMapper.map(form, BankAccount.class);
-    toUpdate.setId(id);
+    BankAccount bankAccount = bankAccountOptional.get();
+    BankAccount bankAccount2 = bankAccountOptional2.get();
+    if (bankAccount.getBalance() - amount < 0) {
+      throw new IllegalArgumentException("Not enough money");
+    }
+    if(amount < 0) {
+      throw new IllegalArgumentException("Amount must be positive");
+    }
 
-    BankAccount response = bankAccountService.updateBankAccount(toUpdate);
+    bankAccount2.setBalance(bankAccount2.getBalance() + amount);
+    bankAccount.setBalance(bankAccount.getBalance() - amount);
+    BankAccount response = bankAccountService.updateBankAccount(bankAccount2);
 
     return mapAndFetchUsers(response);
   }
 
-  @DeleteMapping("/bank-accounts/{bank-account-id}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteBankAccount(@PathVariable("bank-account-id") Long id) {
-    boolean isDeleted = bankAccountService.deleteBankAccountById(id);
+  @PostMapping("/bank-accounts/{bank-account-id}/block")
+  public void blockAccount(@PathVariable("bank-account-id") Long id) {
+    BankAccount bankAccount = bankAccountService.findBankAccountById(id).get();
 
-    if (!isDeleted) {
-      throw new NotFoundException(NotFoundException.BANK_ACCOUNT_NOT_FOUND);
+    checkLogIn();
+    checkBankAccountOwner(bankAccount);
+
+    bankAccountService.blockBankAccount(bankAccount.getId());
+  }
+
+  @PostMapping("/bank-accounts/{bank-account-id}/unblock")
+  public void unblockAccount(@PathVariable("bank-account-id") Long id) {
+      BankAccount bankAccount = bankAccountService.findBankAccountById(id).get();
+
+      checkLogIn();
+      checkAdmin();
+
+      bankAccountService.unblockBankAccount(bankAccount.getId());
+  }
+
+  private void checkLogIn(){
+    if (logIn.getLoginedUser() == null) {
+      throw new IllegalArgumentException("You are not logged in");
     }
   }
 
-  @PostMapping("/bank-accounts/{bank-account-id}/users")
-  @ResponseStatus(HttpStatus.CREATED)
-  public BankAccountResponseDto linkUpUser(@PathVariable("bank-account-id") Long bankAccountId,
-                                           @Valid @RequestBody IdToLinkUpDto userId) {
-
-    linkService.linkUpUserAndBankAccount(userId.getIdToLink(), bankAccountId);
-
-    Optional<BankAccount> bankAccountOptional = bankAccountService.findBankAccountById(bankAccountId);
-
-    return mapAndFetchUsers(bankAccountOptional.get());
+  private void checkBankAccountOwner(BankAccount bankAccount) {
+    if (bankAccount.getUser().getId().equals(logIn.getLoginedUser().getId())) {
+      throw new IllegalArgumentException("You are not owner of this bank account");
+    }
   }
 
-  @DeleteMapping("/bank-accounts/{bank-account-id}/users/{user-id}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void unlinkUpUser(@PathVariable("bank-account-id") Long bankAccountId,
-                           @PathVariable("user-id") Long userId) {
-    linkService.unlinkUpUserAndBankAccount(userId, bankAccountId);
+  private void checkAdmin(){
+    if (!logIn.getLoginedUser().getIs_admin()) {
+      throw new IllegalArgumentException("You are not admin");
+    }
   }
+
 
   private BankAccountResponseDto mapAndFetchUsers(BankAccount bankAccount) {
     List<User> userEntities = bankAccountService.findUserOfBankAccount(bankAccount);

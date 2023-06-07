@@ -1,5 +1,8 @@
 package com.vernik03.payment.service;
 
+import com.vernik03.payment.exception.ErrorMessage;
+import com.vernik03.payment.exception.NotFoundException;
+import com.vernik03.payment.exception.ValidException;
 import com.vernik03.payment.model.BankAccount;
 import com.vernik03.payment.model.User;
 import com.vernik03.payment.repository.UserRepository;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = false)
 public class BankAccountService {
 
   private final BankAccountRepository bankAccountRepository;
@@ -43,6 +47,25 @@ public class BankAccountService {
 
   public List<User> findUserOfBankAccount(BankAccount bankAccount) {
     return userRepository.findUserByBankAccounts(bankAccount);
+  }
+
+  public void checkConnection(Long userId, Long bankAccountId) {
+     BankAccount bankAccount = bankAccountRepository.findById(bankAccountId).orElseThrow();
+     if(!bankAccount.getUser().getId().equals(userId)){
+       throw new NotFoundException(NotFoundException.USER_NOT_FOUND_TO_LINK_UP);
+     }
+  }
+
+  public void blockBankAccount(Long bankAccountId) {
+    BankAccount bankAccount = bankAccountRepository.findById(bankAccountId).orElseThrow();
+    bankAccount.setIs_blocked(true);
+    bankAccountRepository.save(bankAccount);
+  }
+
+  public void unblockBankAccount(Long bankAccountId) {
+    BankAccount bankAccount = bankAccountRepository.findById(bankAccountId).orElseThrow();
+    bankAccount.setIs_blocked(false);
+    bankAccountRepository.save(bankAccount);
   }
 
   @Transactional

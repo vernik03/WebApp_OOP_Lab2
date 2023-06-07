@@ -13,14 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserForm {
-
-  @NotBlank(message = "name_is_blank:Name can not be blank")
-  @Size(max = 255, message = "name_max_size_limit:Max size of name is 255 characters")
-  private String name;
-
-  @NotNull(message = "is_admin_is_empty:Admin info can not be empty")
-  private Boolean is_admin;
-
+  
   @NotBlank(message = "login_is_empty:Login can not be empty")
   @Size(max = 255, message = "login_max_size_limit:Max size of login is 255 characters")
   private String login;

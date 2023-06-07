@@ -53,20 +53,11 @@
         <constraints nullable="false"/>
       </column>
 
-    </createTable>
-
-    <createTable tableName="credit_cards">
-      <column name="fk_user_id" type="bigint">
-        <constraints foreignKeyName="fk_user_id"
-                     references="users(id)"
-                     nullable="false"/>
-      </column>
-
-      <column name="fk_bank_account_id" type="bigint">
-        <constraints foreignKeyName="fk_bank_account_id"
-                     references="bank_accounts(id)"
-                     nullable="false"/>
-      </column>
+        <column name="fk_user_id" type="bigint">
+            <constraints foreignKeyName="fk_user_id"
+                         references="users(id)"
+                         nullable="false"/>
+        </column>
     </createTable>
   </changeSet>
 </databaseChangeLog>

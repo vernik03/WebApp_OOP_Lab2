@@ -1,14 +1,7 @@
 package com.vernik03.payment.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -43,13 +36,8 @@ public class User {
   @Column(name = "password", nullable = false)
   private String password;
 
-  @ManyToMany
-  @JoinTable(
-      name = "credit_cards",
-      joinColumns = @JoinColumn(name = "fk_user_id"),
-      inverseJoinColumns = @JoinColumn(name = "fk_bank_account_id")
-  )
-  private Set<BankAccount> bankAccounts = new HashSet<>();
+  @OneToMany(mappedBy = "user")
+  private Set<BankAccount> bankAccounts;
 
   @Override
   public boolean equals(Object o) {

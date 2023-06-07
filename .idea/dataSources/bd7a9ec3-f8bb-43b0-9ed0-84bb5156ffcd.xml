@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.43">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>1054</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1069</IntrospectionStateNumber>
       <ServerVersion>15.2</ServerVersion>
       <StartupTime>1685820552</StartupTime>
       <TimeZones>true ACDT
@@ -806,10 +806,10 @@ false Zulu
 13183||10|C|G
 13183||-9223372036854775808|U|G
 13183||10|U|G</Grants>
-      <IntrospectionStateNumber>1054</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1069</IntrospectionStateNumber>
       <ObjectId>24655</ObjectId>
-      <Relations>sequence|table|24735|24736|1
-sequence|table|24747|24748|1
+      <Relations>sequence|table|24773|24774|1
+sequence|table|24780|24781|1
 </Relations>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4223,188 +4223,148 @@ sequence|table|24747|24748|1
     <schema id="263" parent="3" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>1054</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1069</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>1026</StateNumber>
       <OwnerName>postgres</OwnerName>
     </schema>
     <sequence id="264" parent="263" name="bank_accounts_id_seq">
       <DataType>bigint|0s</DataType>
-      <ObjectId>24735</ObjectId>
-      <StateNumber>1047</StateNumber>
+      <ObjectId>24773</ObjectId>
+      <StateNumber>1064</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <sequence id="265" parent="263" name="users_id_seq">
       <DataType>bigint|0s</DataType>
-      <ObjectId>24747</ObjectId>
-      <StateNumber>1049</StateNumber>
+      <ObjectId>24780</ObjectId>
+      <StateNumber>1065</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <table id="266" parent="263" name="bank_accounts">
-      <ObjectId>24736</ObjectId>
-      <StateNumber>1050</StateNumber>
+      <ObjectId>24774</ObjectId>
+      <StateNumber>1066</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="267" parent="263" name="credit_cards">
-      <ObjectId>24742</ObjectId>
-      <StateNumber>1050</StateNumber>
+    <table id="267" parent="263" name="users">
+      <ObjectId>24781</ObjectId>
+      <StateNumber>1066</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="268" parent="263" name="users">
-      <ObjectId>24748</ObjectId>
-      <StateNumber>1051</StateNumber>
-      <AccessMethodId>2</AccessMethodId>
-      <OwnerName>postgres</OwnerName>
-    </table>
-    <column id="269" parent="266" name="id">
+    <column id="268" parent="266" name="id">
       <DataType>bigint|0s</DataType>
       <DefaultExpression>nextval(&apos;bank_accounts_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>1047</StateNumber>
+      <StateNumber>1064</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="270" parent="266" name="balance">
+    <column id="269" parent="266" name="balance">
       <DataType>double precision|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>1047</StateNumber>
+      <StateNumber>1064</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="271" parent="266" name="card_number">
+    <column id="270" parent="266" name="card_number">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>1047</StateNumber>
+      <StateNumber>1064</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="272" parent="266" name="is_blocked">
+    <column id="271" parent="266" name="is_blocked">
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>1047</StateNumber>
+      <StateNumber>1064</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <index id="273" parent="266" name="bank_accounts_pkey">
-      <ColNames>id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24740</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>1047</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-    </index>
-    <key id="274" parent="266" name="bank_accounts_pkey">
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24741</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>1047</StateNumber>
-      <UnderlyingIndexId>24740</UnderlyingIndexId>
-    </key>
-    <column id="275" parent="267" name="fk_bank_account_id">
+    <column id="272" parent="266" name="fk_user_id">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StateNumber>1048</StateNumber>
+      <Position>5</Position>
+      <StateNumber>1064</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="276" parent="267" name="fk_user_id">
-      <DataType>bigint|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StateNumber>1048</StateNumber>
-      <TypeId>20</TypeId>
-    </column>
-    <foreign-key id="277" parent="267" name="fknk7pjmyqkdcua2uquk4esah3l">
-      <ColNames>fk_bank_account_id</ColNames>
-      <ObjectId>24756</ObjectId>
-      <RefColNames>id</RefColNames>
-      <RefColPositions>1</RefColPositions>
-      <StateNumber>1050</StateNumber>
-      <RefTableId>24736</RefTableId>
-      <RefTableName>bank_accounts</RefTableName>
-      <RefTableKind>table</RefTableKind>
-    </foreign-key>
-    <foreign-key id="278" parent="267" name="fkrgknmces5lr3wjxx91g9amhcy">
+    <foreign-key id="273" parent="266" name="fkj6qd2lxagsg2bprmw8533u37d">
       <ColNames>fk_user_id</ColNames>
-      <ObjectId>24761</ObjectId>
+      <ObjectId>24789</ObjectId>
       <RefColNames>id</RefColNames>
       <RefColPositions>1</RefColPositions>
-      <StateNumber>1051</StateNumber>
-      <RefTableId>24748</RefTableId>
+      <StateNumber>1066</StateNumber>
+      <RefTableId>24781</RefTableId>
       <RefTableName>users</RefTableName>
       <RefTableKind>table</RefTableKind>
     </foreign-key>
-    <index id="279" parent="267" name="credit_cards_pkey">
-      <ColNames>fk_bank_account_id
-fk_user_id</ColNames>
+    <index id="274" parent="266" name="bank_accounts_pkey">
+      <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24745</ObjectId>
+      <ObjectId>24778</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1048</StateNumber>
+      <StateNumber>1064</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="280" parent="267" name="credit_cards_pkey">
+    <key id="275" parent="266" name="bank_accounts_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24746</ObjectId>
+      <ObjectId>24779</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1048</StateNumber>
-      <UnderlyingIndexId>24745</UnderlyingIndexId>
+      <StateNumber>1064</StateNumber>
+      <UnderlyingIndexId>24778</UnderlyingIndexId>
     </key>
-    <column id="281" parent="268" name="id">
+    <column id="276" parent="267" name="id">
       <DataType>bigint|0s</DataType>
       <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>1049</StateNumber>
+      <StateNumber>1065</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="282" parent="268" name="is_admin">
+    <column id="277" parent="267" name="is_admin">
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>1049</StateNumber>
+      <StateNumber>1065</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="283" parent="268" name="login">
+    <column id="278" parent="267" name="login">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>1049</StateNumber>
+      <StateNumber>1065</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="284" parent="268" name="name">
+    <column id="279" parent="267" name="name">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>1049</StateNumber>
+      <StateNumber>1065</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="285" parent="268" name="password">
+    <column id="280" parent="267" name="password">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StateNumber>1049</StateNumber>
+      <StateNumber>1065</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="286" parent="268" name="users_pkey">
+    <index id="281" parent="267" name="users_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24754</ObjectId>
+      <ObjectId>24787</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1049</StateNumber>
+      <StateNumber>1065</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="287" parent="268" name="users_pkey">
+    <key id="282" parent="267" name="users_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24755</ObjectId>
+      <ObjectId>24788</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1049</StateNumber>
-      <UnderlyingIndexId>24754</UnderlyingIndexId>
+      <StateNumber>1065</StateNumber>
+      <UnderlyingIndexId>24787</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

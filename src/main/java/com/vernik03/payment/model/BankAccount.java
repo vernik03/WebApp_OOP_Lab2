@@ -1,13 +1,6 @@
 package com.vernik03.payment.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.PreRemove;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -40,14 +33,13 @@ public class BankAccount {
   @Column(name = "is_blocked", nullable = false)
   private Boolean is_blocked;
 
-  @ManyToMany(mappedBy = "bankAccounts")
-  private Set<User> users = new HashSet<>();
+  @ManyToOne()
+  @JoinColumn(name = "fk_user_id", referencedColumnName = "id")
+  private User user;
 
   @PreRemove
   private void removeFlightFromCrewMembers() {
-    for (User user : users) {
-      user.getBankAccounts().remove(this);
-    }
+    user.getBankAccounts().remove(this);
   }
 
   @Override

@@ -11,6 +11,6 @@ public interface BankAccountRepository extends JpaRepository<BankAccount, Long> 
 
   long deleteBankAccountById(Long id);
 
-  List<BankAccount> findBankAccountsByUsers(User user);
+  List<BankAccount> findBankAccountsByUser(User user);
 
 }

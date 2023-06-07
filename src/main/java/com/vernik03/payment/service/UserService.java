@@ -42,7 +42,7 @@ public class UserService {
   }
 
   public List<BankAccount> findBankAccountsOfUser(User user) {
-    return bankAccountRepository.findBankAccountsByUsers(user);
+    return bankAccountRepository.findBankAccountsByUser(user);
   }
 
   @Transactional
@@ -55,4 +55,7 @@ public class UserService {
     return userRepository.deleteUserById(id) > 0L;
   }
 
+  public User findUserByLogin(String login) {
+    return userRepository.findUserByLogin(login);
+  }
 }

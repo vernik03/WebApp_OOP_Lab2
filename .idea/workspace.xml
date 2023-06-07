@@ -4,26 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb60ecd3-150a-452c-8b76-95744bf44908" name="Changes" comment="initial commit">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bd7a9ec3-f8bb-43b0-9ed0-84bb5156ffcd.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/bd7a9ec3-f8bb-43b0-9ed0-84bb5156ffcd.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bd7a9ec3-f8bb-43b0-9ed0-84bb5156ffcd/storage_v2/_src_/database/PaymentDB_v2.tyeZ6g/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/bd7a9ec3-f8bb-43b0-9ed0-84bb5156ffcd/storage_v2/_src_/database/PaymentDB_v2.tyeZ6g/schema/public.abK9xQ.meta" afterDir="false" />
+    <list default="true" id="eb60ecd3-150a-452c-8b76-95744bf44908" name="Changes" comment="all works but some changes required">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/CrewMemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/FlightController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/controller/BankAccountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/exception/NotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/exception/NotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/model/BankAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/model/BankAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/service/BankAccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/service/BankAccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/service/CreditCardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vernik03/payment/service/CreditCardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/payment/controller/BankAccountControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/vernik03/payment/controller/BankAccountControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/payment/controller/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/vernik03/payment/controller/UserControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/payment/service/CreditCardServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/vernik03/payment/service/CreditCardServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/model/CrewMember$CrewMemberBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/model/CrewMember.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/vernik03/payment/model/enums/Position.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/db/v1.0/changelog-v1.0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/v1.0/changelog-v1.0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/paymentapp/AirportManagementApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/paymentapp/controller/BankAccountControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/paymentapp/controller/UserControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/paymentapp/service/BankAccountServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/paymentapp/service/CreditCardServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/vernik03/paymentapp/service/UserServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/test-init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/test-init.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +87,7 @@
       <workItem from="1686043328125" duration="132000" />
       <workItem from="1686043510616" duration="9756000" />
       <workItem from="1686054103768" duration="10689000" />
-      <workItem from="1686077518918" duration="14662000" />
+      <workItem from="1686077518918" duration="15180000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1686092045698</created>
@@ -107,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686092045698</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="all works but some changes required">
+      <created>1686095917987</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1686095917987</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,6 +122,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="all works but some changes required" />
+    <option name="LAST_COMMIT_MESSAGE" value="all works but some changes required" />
   </component>
 </project>
